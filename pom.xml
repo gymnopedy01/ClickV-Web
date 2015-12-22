@@ -7,27 +7,103 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>clickvweb Maven Webapp</name>
   <url>http://maven.apache.org</url>
-  <dependencies> 
-		<dependency>
-			<groupId>com.google.zxing</groupId>
-			<artifactId>core</artifactId>
-			<version>3.2.1</version>
-		</dependency>
-<dependency>
-	<groupId>com.google.zxing</groupId>
-	<artifactId>javase</artifactId>
-	<version>3.2.1</version>
-</dependency>
-		
-   </dependencies> 
- 
-
-
-  <build>
-    <finalName>clickvweb</finalName>
-  </build>
   
-  <properties> 
-  	<zxing.version>3.2.2-SNAPSHOT</zxing.version>
-  </properties> 
+  	<properties>
+		<spring.version>3.2.4.RELEASE</spring.version>
+		<web.directory>WebContent</web.directory>
+		<java.version>1.7</java.version>
+	</properties>
+  
+  
+  <dependencies>
+  
+  		<!-- Spring -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-oxm</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+  		<!-- JSON -->
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-core-asl</artifactId>
+			<version>1.9.10</version>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.9.10</version>
+		</dependency>
+	
+	<!-- HTTP CLIENT -->	
+	<dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpclient</artifactId>
+      <version>4.2.6</version>
+      <scope>compile</scope>
+    </dependency>
+		
+	<dependency>
+		<groupId>com.google.zxing</groupId>
+		<artifactId>core</artifactId>
+		<version>3.2.1</version>
+	</dependency>
+	<dependency>
+		<groupId>com.google.zxing</groupId>
+		<artifactId>javase</artifactId>
+		<version>3.2.1</version>
+	</dependency>
+   </dependencies> 
+
 </project>
