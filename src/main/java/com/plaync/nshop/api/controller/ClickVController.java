@@ -19,49 +19,173 @@ import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.plaync.nshop.Result;
-import com.plaync.nshop.api.service.ClicVService;
+import com.plaync.nshop.api.service.ClicVMemberService;
+import com.plaync.nshop.api.service.ClickVVerifyService;
 
+
+
+/**
+ * 찰칵V컨트롤러
+ * 
+ * HOME IP : 123.98.179.219
+ * 
+ */
 @Controller
 public class ClickVController {
 
 	@Autowired
-	ClicVService clickvservice;
+	ClicVMemberService clickvMemberService;
+
+	@Autowired
+	ClickVVerifyService clickvVerifyService;
 	
+//API START 
+	
+	//사용자 가입 API
 	@ResponseBody
 	@RequestMapping(value = "register.json", method = RequestMethod.GET)
-	public Result register(@RequestParam Map<String,String> params, Model model) throws Exception {
+	public Result registerJson(@RequestParam Map<String,String> params, Model model) throws Exception {
 		
 		System.out.println("ClickV register");
 		
 		String userId = params.get("userId");
 		String telId = params.get("telId");
 		
-		if (clickvservice.isRegistered(userId)) {
+		if (clickvMemberService.isRegistered(userId)) {
 			return new Result("ALREADY_REGISTERED");
 		}
 	
-		clickvservice.registerMember(userId, telId);
+		clickvMemberService.registerMember(userId, telId);
 		
 		return new Result("SUCCESS");
 		
 	}
 	
-	
+	//사용자 리스트 API
 	@ResponseBody
-	@RequestMapping(value = "list.json", method = RequestMethod.GET)
+	@RequestMapping(value = "userList.json", method = RequestMethod.GET)
+	public Result<Map<String, String>> userListJson(@RequestParam Map<String,String> params, Model model) throws Exception {
+		
+		System.out.println("ClickV list");
+		
+		return new Result<Map<String, String>>(clickvMemberService.listMember());
+	}
+	
+	//인증 API
+	@ResponseBody
+	@RequestMapping(value = "verify.json", method = RequestMethod.GET)
+	public Result verifyJson(@RequestParam Map<String,String> params, Model model) throws Exception {
+		
+		
+		String userId = params.get("userId");
+		String qrSecret = params.get("qrSecret");
+		
+		System.out.println("ClickV verify : " + userId );
+		
+		if (!clickvMemberService.isRegistered(userId)) {
+			return new Result("NOT_REGISTERED");
+		}
+	
+		if (!clickvVerifyService.verify(userId, qrSecret)) {
+			return new Result("INVALID_QRCODE");
+		}
+		
+		return new Result("SUCCESS");
+		
+	}
+	
+	//활성화된 인증QR 리스트
+	@ResponseBody
+	@RequestMapping(value = "verifyList.json", method = RequestMethod.GET)
 	public Result<Map<String, String>> list(@RequestParam Map<String,String> params, Model model) throws Exception {
 		
 		System.out.println("ClickV list");
 		
-		return new Result<Map<String, String>>(clickvservice.listMember());
+		return new Result<Map<String, String>>(clickvVerifyService.listVerify());
 	}
 	
+//API END 
+
+//	WEB PAGE START
+	@RequestMapping(value = "register", method = RequestMethod.GET)
+	public String register(@RequestParam Map<String,String> params, Model model) throws Exception {
+		
+		String userId = params.get("userId");
+		if (userId == null) {userId = "fuga@ncsoft.com";}
+		model.addAttribute("userId", userId);
+		
+		//가입여부 확인
+		if (clickvMemberService.isRegistered(userId)) {
+			return "alreadyRegister";
+		}
+		
+		return "register";
+	}
+
+	@RequestMapping(value = "verify", method = RequestMethod.GET)
+	public String verify(@RequestParam Map<String,String> params, Model model) throws Exception {
+
+		String userId = params.get("userId");
+		if (userId == null) {userId = "fuga@ncsoft.com";}
+		model.addAttribute("userId", userId);
+		
+		//가입여부 테스트
+		if (!clickvMemberService.isRegistered(userId)) {
+			return "notRegister";
+		}
+		
+		return "verify";
+	}
+
+	@RequestMapping(value = "registerComplete", method = RequestMethod.GET)
+	public String registerComplete(@RequestParam Map<String,String> params, Model model) throws Exception {
+
+		String userId = params.get("userId");
+		if (userId == null) {userId = "fuga@ncsoft.com";}
+		model.addAttribute("userId", userId);
+		
+		//가입여부 테스트
+		if (!clickvMemberService.isRegistered(userId)) {
+			return "notRegister";
+		}
+		
+		return "registerComplete";
+	}
+
+	@RequestMapping(value = "verifyComplete", method = RequestMethod.GET)
+	public String verifyComplete(@RequestParam Map<String,String> params, Model model) throws Exception {
+
+		String userId = params.get("userId");
+		if (userId == null) {userId = "fuga@ncsoft.com";}
+		model.addAttribute("userId", userId);
+		
+		//가입여부 테스트
+		if (!clickvMemberService.isRegistered(userId)) {
+			return "notRegister";
+		}
+		
+		//TODO 여기서부터
+		
+		return "verifyComplete";
+	}
+	
+//	WEB PAGE END
+	
+	
+	
+//QR  IMAGE START	
 	
 	@RequestMapping(value = "register.qr", method = RequestMethod.GET)
-	public String checkQR(@RequestParam Map<String,String> params, Model model) throws Exception {
+	public String registerQR(@RequestParam Map<String,String> params, Model model) throws Exception {
+		
+		String userId = params.get("userId");
+		//가입여부 확인
+		if (clickvMemberService.isRegistered(userId)) {
+			return "alreadyRegister";
+		}
 		
 		String text = "clickv://register.json?"
-				+ "userId=" +"fuga@ncsoft.com";
+				+ "userId=" + userId ;
 				
 		return "forward:/qrImage?text=" + text;
 	}
@@ -69,10 +193,16 @@ public class ClickVController {
 	@RequestMapping(value = "verify.qr", method = RequestMethod.GET)
 	public String verifyQR(@RequestParam Map<String,String> params, Model model) throws Exception {
 		
-		String qrSecret = String.valueOf(8887);
+		String userId = params.get("userId");
+		//가입여부 테스트
+		if (!clickvMemberService.isRegistered(userId)) {
+			return "notRegister";
+		}
+		
+		String qrSecret = clickvVerifyService.makeQrSecret(userId);
 		
 		String text = "clickv://verify.json?"
-				+ "userId=" + "fuga@ncsoft.com"
+				+ "userId=" + userId
 				+ "&qrSecret=" + qrSecret;
 		
 		return "forward:/qrImage?text=" + URLEncoder.encode(text);
