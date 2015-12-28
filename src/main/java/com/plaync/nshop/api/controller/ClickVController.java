@@ -25,7 +25,7 @@ import com.plaync.nshop.api.service.ClickVVerifyService;
 
 
 /**
- * ÂûÄ¬VÄÁÆ®·Ñ·¯
+ * ï¿½ï¿½Ä¬Vï¿½ï¿½Æ®ï¿½Ñ·ï¿½
  * 
  * HOME IP : 123.98.179.219
  * 
@@ -41,7 +41,7 @@ public class ClickVController {
 	
 //API START 
 	
-	//»ç¿ëÀÚ °¡ÀÔ API
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ API
 	@ResponseBody
 	@RequestMapping(value = "register.json", method = RequestMethod.GET)
 	public Result registerJson(@RequestParam Map<String,String> params, Model model) throws Exception {
@@ -50,6 +50,11 @@ public class ClickVController {
 		
 		String userId = params.get("userId");
 		String telId = params.get("telId");
+		
+		if (userId == null || telId == null) {
+			return new Result("INVALID_PARAMETER");
+		}
+		
 		
 		if (clickvMemberService.isRegistered(userId)) {
 			return new Result("ALREADY_REGISTERED");
@@ -61,7 +66,7 @@ public class ClickVController {
 		
 	}
 	
-	//»ç¿ëÀÚ ¸®½ºÆ® API
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® API
 	@ResponseBody
 	@RequestMapping(value = "userList.json", method = RequestMethod.GET)
 	public Result<Map<String, String>> userListJson(@RequestParam Map<String,String> params, Model model) throws Exception {
@@ -71,7 +76,7 @@ public class ClickVController {
 		return new Result<Map<String, String>>(clickvMemberService.listMember());
 	}
 	
-	//ÀÎÁõ API
+	//ï¿½ï¿½ï¿½ï¿½ API
 	@ResponseBody
 	@RequestMapping(value = "verify.json", method = RequestMethod.GET)
 	public Result verifyJson(@RequestParam Map<String,String> params, Model model) throws Exception {
@@ -94,7 +99,7 @@ public class ClickVController {
 		
 	}
 	
-	//È°¼ºÈ­µÈ ÀÎÁõQR ¸®½ºÆ®
+	//È°ï¿½ï¿½È­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½QR ï¿½ï¿½ï¿½ï¿½Æ®
 	@ResponseBody
 	@RequestMapping(value = "verifyList.json", method = RequestMethod.GET)
 	public Result<Map<String, String>> list(@RequestParam Map<String,String> params, Model model) throws Exception {
@@ -114,7 +119,7 @@ public class ClickVController {
 		if (userId == null) {userId = "fuga@ncsoft.com";}
 		model.addAttribute("userId", userId);
 		
-		//°¡ÀÔ¿©ºÎ È®ÀÎ
+		//ï¿½ï¿½ï¿½Ô¿ï¿½ï¿½ï¿½ È®ï¿½ï¿½
 		if (clickvMemberService.isRegistered(userId)) {
 			return "alreadyRegister";
 		}
@@ -129,7 +134,7 @@ public class ClickVController {
 		if (userId == null) {userId = "fuga@ncsoft.com";}
 		model.addAttribute("userId", userId);
 		
-		//°¡ÀÔ¿©ºÎ Å×½ºÆ®
+		//ï¿½ï¿½ï¿½Ô¿ï¿½ï¿½ï¿½ ï¿½×½ï¿½Æ®
 		if (!clickvMemberService.isRegistered(userId)) {
 			return "notRegister";
 		}
@@ -144,7 +149,7 @@ public class ClickVController {
 		if (userId == null) {userId = "fuga@ncsoft.com";}
 		model.addAttribute("userId", userId);
 		
-		//°¡ÀÔ¿©ºÎ Å×½ºÆ®
+		//ï¿½ï¿½ï¿½Ô¿ï¿½ï¿½ï¿½ ï¿½×½ï¿½Æ®
 		if (!clickvMemberService.isRegistered(userId)) {
 			return "notRegister";
 		}
@@ -159,12 +164,12 @@ public class ClickVController {
 		if (userId == null) {userId = "fuga@ncsoft.com";}
 		model.addAttribute("userId", userId);
 		
-		//°¡ÀÔ¿©ºÎ Å×½ºÆ®
+		//ï¿½ï¿½ï¿½Ô¿ï¿½ï¿½ï¿½ ï¿½×½ï¿½Æ®
 		if (!clickvMemberService.isRegistered(userId)) {
 			return "notRegister";
 		}
 		
-		//TODO ¿©±â¼­ºÎÅÍ
+		//TODO ï¿½ï¿½ï¿½â¼­ï¿½ï¿½ï¿½ï¿½
 		
 		return "verifyComplete";
 	}
@@ -179,7 +184,7 @@ public class ClickVController {
 	public String registerQR(@RequestParam Map<String,String> params, Model model) throws Exception {
 		
 		String userId = params.get("userId");
-		//°¡ÀÔ¿©ºÎ È®ÀÎ
+		//ï¿½ï¿½ï¿½Ô¿ï¿½ï¿½ï¿½ È®ï¿½ï¿½
 		if (clickvMemberService.isRegistered(userId)) {
 			return "alreadyRegister";
 		}
@@ -194,7 +199,7 @@ public class ClickVController {
 	public String verifyQR(@RequestParam Map<String,String> params, Model model) throws Exception {
 		
 		String userId = params.get("userId");
-		//°¡ÀÔ¿©ºÎ Å×½ºÆ®
+		//ï¿½ï¿½ï¿½Ô¿ï¿½ï¿½ï¿½ ï¿½×½ï¿½Æ®
 		if (!clickvMemberService.isRegistered(userId)) {
 			return "notRegister";
 		}
