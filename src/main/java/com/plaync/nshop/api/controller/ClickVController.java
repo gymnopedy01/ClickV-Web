@@ -171,6 +171,8 @@ public class ClickVController {
 			return "notRegister";
 		}
 		
+		model.addAttribute("telId", clickvMemberService.listMember().get(userId));
+		
 		//TODO ���⼭����
 		
 		return "verifyComplete";
