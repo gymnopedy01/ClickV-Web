@@ -154,6 +154,8 @@ public class ClickVController {
 			return "notRegister";
 		}
 		
+		model.addAttribute("telId", clickvMemberService.listMember().get(userId));
+		
 		return "registerComplete";
 	}
 
