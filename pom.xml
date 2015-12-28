@@ -3,8 +3,8 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.ncsoft</groupId>
   <artifactId>clickvweb</artifactId>
-  <packaging>war</packaging>
   <version>0.0.1-SNAPSHOT</version>
+  <packaging>jar</packaging>
   <name>clickvweb Maven Webapp</name>
   <url>http://maven.apache.org</url>
   
