@@ -1,6 +1,7 @@
 package com.plaync.nshop.api.controller;
 
 import java.net.URLEncoder;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletOutputStream;
@@ -102,11 +103,21 @@ public class ClickVController {
 	//Ȱ��ȭ�� ����QR ����Ʈ
 	@ResponseBody
 	@RequestMapping(value = "verifyList.json", method = RequestMethod.GET)
-	public Result<Map<String, String>> list(@RequestParam Map<String,String> params, Model model) throws Exception {
+	public Result<Map<String, Map<String, String>>> list(@RequestParam Map<String,String> params, Model model) throws Exception {
 		
 		System.out.println("ClickV list");
 		
-		return new Result<Map<String, String>>(clickvVerifyService.listVerify());
+		return new Result<Map<String, Map<String, String>>>(clickvVerifyService.listVerify());
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "verifyHistory.json", method = RequestMethod.GET)
+	public Result<List<Map<String,String>>> verifyhistory(@RequestParam Map<String,String> params, Model model) throws Exception {
+		
+		System.out.println("ClickV History");
+		
+		String userId = params.get("userId");
+		return new Result<List<Map<String,String>>>(clickvVerifyService.historyVerify(userId));
 	}
 	
 //API END 
@@ -173,7 +184,9 @@ public class ClickVController {
 		
 		model.addAttribute("telId", clickvMemberService.listMember().get(userId));
 		
-		//TODO ���⼭����
+		if (!clickvVerifyService.isVerified(userId)) {
+			return "notVerify";
+		}
 		
 		return "verifyComplete";
 	}

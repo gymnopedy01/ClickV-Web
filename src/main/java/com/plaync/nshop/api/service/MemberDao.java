@@ -19,7 +19,7 @@ public class MemberDao {
 		return memberList;
 	}
 	
-	public boolean isRegistered(String userId) {
+	public boolean isRegisteredUserId(String userId) {
 		return memberList.containsKey(userId);
 	}
 

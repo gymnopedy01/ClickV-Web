@@ -20,7 +20,7 @@ public class ClicVMemberService {
 	}
 	
 	public boolean isRegistered(String userId) {
-		return memberDao.isRegistered(userId);
+		return memberDao.isRegisteredUserId(userId);
 	}
 	
 
