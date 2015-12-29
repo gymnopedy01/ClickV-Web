@@ -8,6 +8,6 @@
 </head>
 <body>
 찰칵V 미가입상태입니다. <br/>
-<a href="register?userId=${userId}">가입</a> 후 이용 해주세요.
+<a href="registerForm.jsp?userId=${userId}">가입</a> 후 이용 해주세요.
 </body>
 </html>

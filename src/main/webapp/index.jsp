@@ -6,5 +6,5 @@ ClickVWeb INDEX
 <br/>
 <br/>
 
-<a href="register">register</a> <br/>
-<a href="verify">verify</a>	<br/>
+<a href="registerForm.jsp">registerForm</a> <br/>
+<a href="verifyForm.jsp">verifyForm</a>	<br/>

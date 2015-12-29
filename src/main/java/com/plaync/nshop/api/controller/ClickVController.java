@@ -137,8 +137,10 @@ public class ClickVController {
 	public String register(@RequestParam Map<String,String> params, Model model) throws Exception {
 		
 		String userId = params.get("userId");
-		if (userId == null) {userId = "fuga@ncsoft.com";}
+		String telId = params.get("telId");
+
 		model.addAttribute("userId", userId);
+		model.addAttribute("telId", telId);
 		
 		//���Կ��� Ȯ��
 		if (clickvMemberService.isRegistered(userId)) {
@@ -211,15 +213,18 @@ public class ClickVController {
 	public String registerQR(@RequestParam Map<String,String> params, Model model) throws Exception {
 		
 		String userId = params.get("userId");
+		String telId = params.get("telId");
+		
 		//���Կ��� Ȯ��
 		if (clickvMemberService.isRegistered(userId)) {
 			return "alreadyRegister";
 		}
 		
-		String text = "clickv://register.json?"
-				+ "userId=" + userId ;
-				
-		return "forward:/qrImage?text=" + text;
+		String text = "clickv://register.json"
+				+ "?userId=" + userId
+				+ "&telId=" + telId;
+		
+		return "forward:/qrImage?text=" + URLEncoder.encode(text);
 	}
 
 	@RequestMapping(value = "verify.qr", method = RequestMethod.GET)
