@@ -24,6 +24,7 @@ public class VerifyHistoryDao {
 		
 		Map<String,String> userVerifyHisory = new HashMap<String,String>();
 		userVerifyHisory.put("site", "nshop");
+		userVerifyHisory.put("verificationName", "2차인증");
 		userVerifyHisory.put("timestamp", String.valueOf(System.currentTimeMillis()));
 		
 		
