@@ -120,6 +120,16 @@ public class ClickVController {
 		return new Result<List<Map<String,String>>>(clickvVerifyService.historyVerify(userId));
 	}
 	
+	@ResponseBody
+	@RequestMapping(value = "userInfo.json", method = RequestMethod.GET)
+	public Result<ClickVUserInfo> clickvUserInfo(@RequestParam Map<String,String> params, Model model) throws Exception {
+		
+		System.out.println("ClickV History");
+		
+		String telId = params.get("telId");
+		return new Result<ClickVUserInfo>(clickvMemberService.getMember(telId));
+	}
+	
 //API END 
 
 //	WEB PAGE START

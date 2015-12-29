@@ -5,6 +5,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.plaync.nshop.api.controller.ClickVUserInfo;
+
 @Service
 public class ClicVMemberService {
 
@@ -23,5 +25,8 @@ public class ClicVMemberService {
 		return memberDao.isRegisteredUserId(userId);
 	}
 	
+	public ClickVUserInfo getMember(String telId) {
+		return memberDao.getMember(telId);
+	}
 
 }
