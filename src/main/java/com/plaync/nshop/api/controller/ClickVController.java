@@ -169,11 +169,12 @@ public class ClickVController {
 	public String registerComplete(@RequestParam Map<String,String> params, Model model) throws Exception {
 
 		String userId = params.get("userId");
-		if (userId == null) {userId = "fuga@ncsoft.com";}
 		model.addAttribute("userId", userId);
 		
 		//���Կ��� �׽�Ʈ
 		if (!clickvMemberService.isRegistered(userId)) {
+			String telId = params.get("telId");
+			model.addAttribute("telId", telId);
 			return "notRegister";
 		}
 		
