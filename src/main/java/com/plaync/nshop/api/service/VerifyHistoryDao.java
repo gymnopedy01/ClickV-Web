@@ -24,7 +24,7 @@ public class VerifyHistoryDao {
 		
 		Map<String,String> userVerifyHisory = new HashMap<String,String>();
 		userVerifyHisory.put("site", "nshop");
-		userVerifyHisory.put("date", new Date().toString());
+		userVerifyHisory.put("timestamp", String.valueOf(System.currentTimeMillis()));
 		
 		
 		history.add(userVerifyHisory);
