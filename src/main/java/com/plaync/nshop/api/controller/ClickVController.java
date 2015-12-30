@@ -245,7 +245,7 @@ public class ClickVController {
 				+ "userId=" + userId
 				+ "&qrSecret=" + qrSecret
 				+ "&site=" + site
-				+ "&verificationName" + verificationName;
+				+ "&verificationName=" + verificationName;
 		
 		return "forward:/qrImage?text=" + URLEncoder.encode(text);
 	}

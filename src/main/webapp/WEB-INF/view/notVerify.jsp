@@ -195,7 +195,7 @@
 		
 	<div class="modal">
 		<div class="header">
-			<h3 class="otp">찰칵V인증서비스</h3>
+			<h3 class="otp">찰칵V 인증 서비스</h3>
 			<span class="modal_close" onclick="closeModal();">modal window close</span>
 		</div>
 	
