@@ -215,7 +215,6 @@ public class ClickVController {
 	public String registerQR(@RequestParam Map<String,String> params, Model model) throws Exception {
 		
 		String userId = params.get("userId");
-		String telId = params.get("telId");
 		
 		//���Կ��� Ȯ��
 		if (clickvMemberService.isRegistered(userId)) {
@@ -223,8 +222,7 @@ public class ClickVController {
 		}
 		
 		String text = "clickv://register.json"
-				+ "?userId=" + userId
-				+ "&telId=" + telId;
+				+ "?userId=" + userId;
 		
 		return "forward:/qrImage?text=" + URLEncoder.encode(text);
 	}
