@@ -233,7 +233,7 @@
 		<span class="close" onclick="orderformCancel();">닫기</span>
 	</div>
 
-	<form id="purchaseForm" name="purchaseForm" action="/aion/order/purchase" method="post">
+	<form id="purchaseForm" name="purchaseForm" action="purchase.jsp" method="post">
 	
 	
 	<input type="hidden" id="totalRewardAmount" name="totalRewardAmount">
@@ -1962,7 +1962,7 @@ $(function() {
 		
 		var url;
 		if (type == 'VERIFY_ERROR') {
-			url = "register?returnFrm=" + frmName + "&protocol=HTTP&userId=fuga@ncsoft.com";
+			url = "verify?returnFrm=" + frmName + "&protocol=HTTP&userId=fuga@ncsoft.com";
 		} 
 		
 		jQuery(document.body).append('<iframe title="모달 윈도우 프레임" id="agrIframe" allowTransparency="true" src="' + url + '" width="100%" height="100%" scrolling="no" frameborder="0" style="position:absolute; left:0; top:0; width:100%; height:100%; z-index:100005;"></iframe>');

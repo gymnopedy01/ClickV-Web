@@ -184,11 +184,11 @@ public class ClickVController {
 		return "registerComplete";
 	}
 
-	@RequestMapping(value = "verifyComplete", method = RequestMethod.GET)
+	@RequestMapping(value = "verifyComplete", method = {RequestMethod.GET, RequestMethod.POST})
 	public String verifyComplete(@RequestParam Map<String,String> params, Model model) throws Exception {
 
 		String userId = params.get("userId");
-		if (userId == null) {userId = "fuga@ncsoft.com";}
+
 		model.addAttribute("userId", userId);
 		
 		//���Կ��� �׽�Ʈ
