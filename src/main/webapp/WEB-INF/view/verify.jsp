@@ -216,7 +216,7 @@
 				<div class="frame">
 					
 					<div align="center">
-						<img src="verify.qr?userId=${userId}"/>
+						<img src="verify.qr?userId=${userId}&site=NShop&verificationName=2차인증"/>
 					</div>
 					
 
