@@ -231,6 +231,9 @@ public class ClickVController {
 	public String verifyQR(@RequestParam Map<String,String> params, Model model) throws Exception {
 		
 		String userId = params.get("userId");
+		String site = params.get("site");
+		String verificationName = params.get("verificationName");
+		
 		//���Կ��� �׽�Ʈ
 		if (!clickvMemberService.isRegistered(userId)) {
 			return "notRegister";
@@ -240,7 +243,9 @@ public class ClickVController {
 		
 		String text = "clickv://verify.json?"
 				+ "userId=" + userId
-				+ "&qrSecret=" + qrSecret;
+				+ "&qrSecret=" + qrSecret
+				+ "&site=" + site
+				+ "&verificationName" + verificationName;
 		
 		return "forward:/qrImage?text=" + URLEncoder.encode(text);
 	}
