@@ -82,9 +82,10 @@ public class ClickVController {
 	@RequestMapping(value = "verify.json", method = RequestMethod.GET)
 	public Result verifyJson(@RequestParam Map<String,String> params, Model model) throws Exception {
 		
-		
-		String userId = params.get("userId");
-		String qrSecret = params.get("qrSecret");
+		String userId			= params.get("userId");
+		String qrSecret			= params.get("qrSecret");
+		String site				= params.get("site");
+		String verificationName = params.get("verificationName");
 		
 		System.out.println("ClickV verify : " + userId );
 		
@@ -92,7 +93,7 @@ public class ClickVController {
 			return new Result("NOT_REGISTERED");
 		}
 	
-		if (!clickvVerifyService.verify(userId, qrSecret)) {
+		if (!clickvVerifyService.verify(userId, qrSecret, site, verificationName)) {
 			return new Result("INVALID_QRCODE");
 		}
 		

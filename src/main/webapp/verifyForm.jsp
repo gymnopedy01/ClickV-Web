@@ -8,9 +8,9 @@
 </ul>
 
 <form action="verify" >
-	계정 :: <input name="userId" type="text" value="fuga@ncsoft.com" style=""/><br/>
-	사이트명: nshop
-	인증구분: 2차인증
+	계정 :: <input name="userId" type="text" value="${userId}" style=""/><br/>
+	사이트명: <input name="site" type="text" value="${site}" style=""/><br/>
+	인증구분: <input name="verificationName" type="text" value="${verificationName}" style=""/><br/>
 	<input type="submit" value="ClickV verify" /><br/>	
 </form>
 

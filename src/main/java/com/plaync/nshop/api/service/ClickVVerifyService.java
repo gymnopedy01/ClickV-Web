@@ -31,8 +31,8 @@ public class ClickVVerifyService {
 		return verifyDao.listVerify();
 	}
 
-	public boolean verify(String userId, String qrSecret) {
-		verifyHistoryDao.addVerifyHistory(userId);
+	public boolean verify(String userId, String qrSecret, String site, String verificationName) {
+		verifyHistoryDao.addVerifyHistory(userId, site, verificationName);
 		return verifyDao.verify(userId, qrSecret);
 	}
 
@@ -41,6 +41,7 @@ public class ClickVVerifyService {
 	}
 
 	public boolean isVerified(String userId) {
+		
 		Map<String,String> verify = verifyDao.getVerify(userId);
 		
 		if (verify == null) {
@@ -48,6 +49,7 @@ public class ClickVVerifyService {
 		}
 		
 		return "Y".equals(verify.get("verify"));
+		
 	}
 	
 }

@@ -9,8 +9,8 @@
 </ul>
 
 <form action="register" >
-	연동 계정 :: <input name="userId" type="text" value="fuga@ncsoft.com" style=""/><br/>
-	전화 번호 :: <input name="telId" type="text" value="+821047564378" style=""/><br/>
+	연동 계정 :: <input name="userId" type="text" value="${userId}" style=""/><br/>
+	전화 번호 :: <input name="telId" type="text" value="${telId}" style=""/><br/>
 	<input type="submit" value="ClickV register" /><br/>	
 </form>
 
