@@ -251,7 +251,7 @@
 	
 		<!-- button -->
 		<div class="btn_guide">
-			<button class="btnb_confirm" onclick="javascript:location.href='verify?userId=${userId}&telId=${telId}'">확인</button>
+			<button class="btnb_confirm" onclick="javascript:location.href='registerComplete?userId=${userId}'">확인</button>
 		</div>
 	
 	</div>
